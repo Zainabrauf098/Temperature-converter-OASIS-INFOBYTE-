@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style8.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <input type="number" id="temperatureInput" placeholder="Enter temperature" required>
+        <div class="selector">
+            <label>
+                <input type="radio" name="unit" value="C" checked> Celsius
+            </label>
+            <label>
+                <input type="radio" name="unit" value="F"> Fahrenheit
+            </label>
+            <label>
+                <input type="radio" name="unit" value="K"> Kelvin
+            </label>
+        </div>
+        <button id="convertButton">Convert</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+    document.getElementById("convertButton").addEventListener("click", function() {
+    const temperature = parseFloat(document.getElementById("temperatureInput").value);
+    const unit = document.querySelector('input[name="unit"]:checked').value;
+    let result = "";
+
+    if (isNaN(temperature)) {
+        result = "Please enter a valid number.";
+    } else {
+        switch (unit) {
+            case 'C':
+                result = `${temperature}°C = ${(temperature * 9/5) + 32}°F = ${temperature + 273.15}K`;
+                break;
+            case 'F':
+                result = `${temperature}°F = ${(temperature - 32) * 5/9}°C = ${((temperature - 32) * 5/9) + 273.15}K`;
+                break;
+            case 'K':
+                result = `${temperature}K = ${(temperature - 273.15) * 9/5 + 32}°F = ${temperature - 273.15}°C`;
+                break;
+        }
+    }
+
+    document.getElementById("result").innerText = result;
+});
+
+</script>
